@@ -4,16 +4,18 @@ import { evaluate } from 'mathjs';
 
 const App = () => {
 
-  const calcKeys = ['0', '1' , '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '=', 'c']
+  const calcKeys = ['0', '1' , '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '=', 'AC']
 
   const [calculation, setCalculation] = useState('')
 
   const addToCalc = (keyUsed) => {
     if (keyUsed === '='){ 
       let x = calculation
+
+      // evaluate takes the string created and produces an answer
       setCalculation(evaluate(x))
     }
-    else if (keyUsed === 'c'){
+    else if (keyUsed === 'AC'){
       setCalculation('')
     }
     else{
@@ -21,17 +23,21 @@ const App = () => {
     }}
  
   return (
-    <div className="App">
+    <div className="calculator">
 
-      <h1>Calculator</h1>
+      <h1 className="title">Calculator</h1>
 
-      <h2>{calculation}</h2>
+      <div className="calculator-screen">
+        <h2>{calculation}</h2>
+      </div>
 
-      {calcKeys.map((keyUsed, index) => {
+      <div className="calculator-buttons">
+        {calcKeys.map((keyUsed, index) => {
 
-        return <button key={index} label={keyUsed} onClick={() => addToCalc(keyUsed)}>{keyUsed}</button>
+          return <button className="Button" key={index} label={keyUsed} onClick={() => addToCalc(keyUsed)}>{keyUsed}</button>
 
-      })}
+        })}
+      </div>
 
 
     </div>
